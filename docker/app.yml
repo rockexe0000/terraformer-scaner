@@ -1,0 +1,70 @@
+version: '3.5'
+services:
+
+  terraform-scaner:
+    build:
+      context: ..
+      dockerfile: ./Dockerfile
+    platform: linux/amd64
+    image: terraform-scaner:latest
+    container_name: terraform-scaner
+    restart: "no"
+    
+
+    ### 持續執行
+    command: ["tail","-f","/dev/null"]
+    
+    ### 批次執行
+    #command: ["terraform","-version"]
+
+    #command:
+    #  - /bin/bash
+    #  - -c
+    #  - |
+    #    terraform init
+    #    bash run.sh
+
+
+
+    volumes:
+      - './credentials/aws:/root/.aws:Z'
+      - './aws:/var/app/aws:Z'
+
+    environment:
+    #  - AWS_ACCESS_KEY=${AWS_ACCESS_KEY}
+    #  - AWS_SECRET_KEY=${AWS_SECRET_KEY}
+      - profiles=${profiles}
+      - regions=${regions}
+      - services=${services}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
